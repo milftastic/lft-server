@@ -2,7 +2,7 @@
 # IMPORTANT: run exactly ONE machine. Statuses live in memory, so two machines
 # would each hold half of them. Deploy with: fly deploy --ha=false
 
-app = "CHANGE-ME"          # set by `fly launch`, or pick a unique name
+app = "osrs-lft"
 primary_region = "lax"     # pick one near most of your players
 
 [env]
