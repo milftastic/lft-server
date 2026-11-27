@@ -1,6 +1,6 @@
 # Looking For Team server
 
-Backend for the [Looking For Team](../lft-plugin) RuneLite plugin. It keeps LFT
+Backend for the [Looking For Team](https://github.com/milftastic/lft-plugin) RuneLite plugin. It keeps LFT
 statuses in memory and answers lookups. It never sees player names: only
 SHA-256 hashes (see the plugin README for how visibility keys work).
 
