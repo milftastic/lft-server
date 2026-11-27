@@ -3,6 +3,7 @@ package com.lookingforteam.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import io.javalin.Javalin;
+import io.javalin.config.RoutesConfig;
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
 import io.javalin.http.HttpResponseException;
@@ -67,8 +68,15 @@ public class LftServer
 
 	static Javalin create(StatusStore store, RateLimiter limiter, boolean behindFlyProxy, boolean dev)
 	{
-		Javalin app = Javalin.create(config -> config.http.maxRequestSize = 256_000L);
+		return Javalin.create(config ->
+		{
+			config.http.maxRequestSize = 256_000L;
+			addRoutes(config.routes, store, limiter, behindFlyProxy, dev);
+		});
+	}
 
+	private static void addRoutes(RoutesConfig app, StatusStore store, RateLimiter limiter, boolean behindFlyProxy, boolean dev)
+	{
 		app.get("/health", ctx -> ctx.result("ok"));
 
 		app.before("/v1/*", ctx ->
@@ -125,8 +133,6 @@ public class LftServer
 
 			app.get("/dev/statuses", ctx -> ctx.result("owners=" + store.size() + " keys=" + store.keyCount()));
 		}
-
-		return app;
 	}
 
 	private static int envInt(String name, int fallback)

@@ -9,6 +9,9 @@ Statuses expire 5 minutes after their last refresh and plugins refresh every
 
 ## Run locally
 
+Runs on Java 21 (Javalin 7 / Jetty 12). You don't need it installed: Gradle
+downloads a Java 21 toolchain for this project automatically.
+
 ```
 LFT_DEV=true ./gradlew run      # http://localhost:8080, with /dev test endpoints
 ./gradlew test

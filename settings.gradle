@@ -1,1 +1,6 @@
+plugins {
+	// Lets Gradle download the Java 21 toolchain itself instead of needing it installed.
+	id 'org.gradle.toolchains.foojay-resolver-convention' version '0.10.0'
+}
+
 rootProject.name = 'lft-server'
