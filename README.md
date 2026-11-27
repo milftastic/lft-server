@@ -5,7 +5,7 @@ statuses in memory and answers lookups. It never sees player names: only
 SHA-256 hashes (see the plugin README for how visibility keys work).
 
 Statuses expire 5 minutes after their last refresh and plugins refresh every
-60 seconds, so nothing needs to survive a restart and there is no database.
+15 seconds while looking, so nothing needs to survive a restart and there is no database.
 
 ## Run locally
 
@@ -26,7 +26,7 @@ curl -X POST localhost:8080/dev/seed -d '{"name":"Bob","visibleTo":["Alice"],"ac
 |---|---|---|
 | `PORT` | 8080 | |
 | `MAX_STORED_KEYS` | 600000 | Total visibility keys held (~300 bytes each). Beyond this, new publishes get 503. |
-| `RATE_PER_MINUTE` / `RATE_BURST` | 60 / 30 | Per-client limit. A normal plugin uses ~2/min. |
+| `RATE_PER_MINUTE` / `RATE_BURST` | 60 / 30 | Per-client limit. A plugin that is looking uses ~8/min; one that is not uses none. |
 | `LFT_DEV` | off | Enables `/dev/*`. **Never set on a public server.** |
 
 ## Deploy to Fly.io

@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.LongSupplier;
 
 /**
- * Per-client token bucket. A normal plugin makes ~2 requests a minute (plus one
+ * Per-client token bucket. A plugin that is looking makes ~8 requests a minute (plus one
  * per checkbox click), so the defaults leave plenty of headroom while stopping
  * a script from hammering the server.
  */
