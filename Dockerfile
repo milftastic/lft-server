@@ -5,9 +5,11 @@ COPY . .
 # Strip Windows line endings in case the repo was checked out on Windows.
 RUN sed -i 's/\r$//' gradlew && chmod +x gradlew && ./gradlew --no-daemon installDist
 
-# Run stage: just a JRE and the packaged app.
+# Run stage: just a JRE and the packaged app, running as an unprivileged user.
 FROM eclipse-temurin:21-jre
+RUN useradd --system --no-create-home --shell /usr/sbin/nologin lft
 WORKDIR /app
 COPY --from=build /src/build/install/lft-server /app
+USER lft
 EXPOSE 8080
 CMD ["/app/bin/lft-server"]
